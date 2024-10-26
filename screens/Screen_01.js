@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import{View, Text, FlatListm, Image, StySheet, ScrollView, TouchableOpacity, Dimensions, SafeAreaView,Platform, TextInput} from 'react-native';
 import axios from 'axios';
+import { FlatList } from 'react-native-web';
 
 const Screen_01 = () => {
     const [category, setCategory] = useEffect ([]);
@@ -23,6 +24,7 @@ const Screen_01 = () => {
         <SafeAreaView style={StyleSheet.safeArea}>
             <View style={styles.container}>
                 <ScrollView style={{width: "100%", height: 500}}>
+
                 {/* Header */}
                 <View style={styles.headerContainer}>
                    <View style={styles.header}>
@@ -52,8 +54,26 @@ const Screen_01 = () => {
                    </View>
                 </View>
 
-                
+                {/* Categories */}
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>Category</Text>
+                    <Image source={require('../assets/3gach.png')} style={styles.icon3gach}/>
+                </View>
+                <FlatList
+                    data={category}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity style={[styles.categoryItem, {width: screenWidth / numColumns }]}>
+                            <View style={styles.categoryIconContainer}>
+                                <Image source={{ uri: item.image }} style={styles.categoryIcon}/>
+                            </View>
+                            <Text style={styles.categoryText}>{item.name}</Text>
+                        </TouchableOpacity>
+                    )}
+                    numColumns={numColumns}
+                />
 
+                
                 </ScrollView>
             </View>
         </SafeAreaView>
