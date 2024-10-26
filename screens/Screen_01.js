@@ -73,7 +73,18 @@ const Screen_01 = () => {
                     numColumns={numColumns}
                 />
 
-                
+                {/* Recommended */}
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>Popular Destination</Text>
+                </View>
+                <FlatList 
+                    data={location.slice(3, 5)}
+                    horizontal
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({item}) => (
+                        <Image source={{ uri: item.image}} style={styles.locationImageOfRec}/>
+                    )}
+                />
                 </ScrollView>
             </View>
         </SafeAreaView>
